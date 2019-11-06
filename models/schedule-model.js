@@ -65,7 +65,7 @@ const deleteUser = (id) => {
 const verifyAuth = async (username, password) => {
   const verifyUser = await UserCollection.findOne({username: username})
   if (password === verifyUser.password) {
-    return true
+    return verifyUser
   }
 }
 

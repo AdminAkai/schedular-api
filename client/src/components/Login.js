@@ -1,13 +1,18 @@
 
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 export default class HelloWorld extends Component {
 
     state = {
         enteredUsername: '',
         enteredPassword: '',
+        currentUserId: '',
+        loggedIn: false
     }
+
+    currentDashboard = `/dashboard/${this.state.currentUserId}`
 
     onTextChange = (event) => {
         const previousData = { ...this.state }
@@ -21,17 +26,26 @@ export default class HelloWorld extends Component {
             name: this.state.enteredUsername,
             password: this.state.enteredPassword
         }
-        const verification = axios.post('/dashboard', currentUser)
-        if (verification) {
+        const verifiedUser = axios.post('/dashboard', currentUser)
+        console.log(currentUser)
+        if (verifiedUser) {
+            const currentId = verifiedUser._id
+            this.setState({currentUserId: currentId})
             this.getDashboard()
         } else {
             alert('Username/Password incorrect')
         }
     }
 
+    getDashboard = () => {
+        const logIn = true
+        this.setState({loggedIn: logIn})
+    }
+
     render() {
         return (
             <div>
+                {this.state.loggedIn ? <Redirect to={this.currentDashboard}></Redirect> : null}
                 <h1>SCHEDUL&lambda;R</h1>
                 <div>
                 <form>
@@ -45,13 +59,15 @@ export default class HelloWorld extends Component {
                         value={this.state.enteredUsername}
                     ></input>
                     <h4>Password</h4>
-                    <input></input>
-                    <h4>Admin</h4>
-                    <select>
-                        <option></option>
-                        <option></option>
-                    </select>
-                    <input></input>
+                    <input
+                        name="enteredPassword"
+                        type="password"
+                        placeholder="Password"
+                        required
+                        onChange={this.onTextChange}
+                        value={this.state.enteredPassword}
+                    ></input>
+                    <input type="submit" onClick={this.verifyData}></input>
                 </form>
                 </div>
             </div>
