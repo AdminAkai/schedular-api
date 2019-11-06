@@ -42,7 +42,7 @@ export default class Login extends Component {
                 this.setState({loggedIn: true})
             })
         } else {
-            alert('Username/Password incorrect')
+            alert('Username/Password Incorrect')
         }
     }
 
@@ -50,29 +50,36 @@ export default class Login extends Component {
         return (
             <div>
                 {this.renderRedirect()}
-                <h1>SCHEDUL&lambda;R</h1>
-                <div>
-                <form>
-                    <h4>Username</h4>
-                    <input
-                        name="enteredUsername"
-                        type="string"
-                        placeholder="Username"
-                        required
-                        onChange={this.onTextChange}
-                        value={this.state.enteredUsername}
-                    ></input>
-                    <h4>Password</h4>
-                    <input
-                        name="enteredPassword"
-                        type="password"
-                        placeholder="Password"
-                        required
-                        onChange={this.onTextChange}
-                        value={this.state.enteredPassword}
-                    ></input>
-                    <input type="submit" onClick={this.verifyData}></input>
-                </form>
+                <h1 className="schedular text-shadow">SCHEDUL&lambda;R</h1>
+                <div className="login animated animatedFadeInUp fadeInUp">
+                    <form className="form shadow">
+                        <h4>Username</h4>
+                        <input
+                            className="username"
+                            name="enteredUsername"
+                            type="string"
+                            placeholder="Username"
+                            required
+                            onChange={this.onTextChange}
+                            value={this.state.enteredUsername}
+                        ></input>
+                        <h4>Password</h4>
+                        <input
+                            className="password"
+                            name="enteredPassword"
+                            type="password"
+                            placeholder="Password"
+                            required
+                            onChange={this.onTextChange}
+                            value={this.state.enteredPassword}
+                        ></input>
+                        <input
+                            className="submit" 
+                            type="submit" 
+                            onClick={this.verifyData} 
+                            value="Login"
+                        ></input>
+                    </form>
                 </div>
             </div>
         )

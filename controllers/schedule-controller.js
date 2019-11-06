@@ -7,6 +7,19 @@ const scheduleApi = require('../models/schedule-model.js')
 
 const scheduleRouter = express.Router()
 
+async function routeCurrentUser (id) {
+  try {
+    const user = await scheduleApi.getUser(id)
+    return res.status(200).json(user)
+  } catch(e) {
+    const message = 'Failed to get user'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+}
+
 // Login
 scheduleRouter.post('/verify', async (req, res) => {
   console.log(req.body.username)
@@ -25,17 +38,13 @@ scheduleRouter.post('/verify', async (req, res) => {
 })
 
 // Dashboard of user
-scheduleRouter.get('/dashboard/:id', async (req, res) => {
-  try {
-    const user = await scheduleApi.getUser(req.params.id)
-    return res.status(200).json(user)
-  } catch(e) {
-    const message = 'Failed to get user'
-    res.status(500).json({
-      error: e,
-      message,
-    })
-  }
+scheduleRouter.get('/dashboard/:id', (req, res) => {
+  routeCurrentUser(req.params.id)
+})
+
+// Edit profile screen
+scheduleRouter.get('/dashboard/edit/:id', (req, res) => {
+  routeCurrentUser(req.params.id)
 })
 
 module.exports = {

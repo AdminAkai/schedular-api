@@ -1,33 +1,105 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-family: 'Dosis', sans-serif;
+  letter-spacing: 0.1em;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00a2ff;
 }
 
-.App-link {
-  color: #61dafb;
+.schedular {
+  margin-top: -250px;
+  font-size: 100px;
+  color: #ffffff;
 }
 
-@keyframes App-logo-spin {
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form {
+  padding: 20px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.username {
+  margin-top: -12px;
+}
+
+.submit {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ffffff;
+  font-size: 18px;
+  padding: 10px;
+  font-weight: 600;
+  background: #ffffff;
+}
+
+.submit:hover {
+  background: rgba(0, 247, 255, 0.5);
+  border: 1px solid rgba(0, 247, 255, 0.5);
+}
+
+.password {
+  margin-top: -12px;
+}
+
+@keyframes fadeInUp {
   from {
-    transform: rotate(0deg);
+      transform: translate3d(0,40px,0);
   }
+
   to {
-    transform: rotate(360deg);
+      transform: translate3d(0,0,0);
+      opacity: 1;
   }
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+      transform: translate3d(0,40px,0);
+  }
+
+  to {
+      transform: translate3d(0,0,0);
+      opacity: 1;
+  }
+}
+
+.animated {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 0.8s;
+  -webkit-animation-fill-mode: both;
+}
+
+.animatedFadeInUp {
+  opacity: 0;
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
+}
+
+.shadow {
+  -webkit-box-shadow: 7px 11px 4px 0px rgba(143,133,143,0.5);
+  -moz-box-shadow: 7px 11px 4px 0px rgba(143,133,143,0.5);
+  box-shadow: 7px 11px 4px 0px rgba(143,133,143,0.5);
+}
+
+.text-shadow {
+  text-shadow: 2px 2px #525151;
 }
