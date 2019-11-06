@@ -26,7 +26,7 @@ export default class HelloWorld extends Component {
             name: this.state.enteredUsername,
             password: this.state.enteredPassword
         }
-        const verifiedUser = axios.post('/dashboard', currentUser)
+        const verifiedUser = axios.post('/', currentUser)
         console.log(currentUser)
         if (verifiedUser) {
             const currentId = verifiedUser._id

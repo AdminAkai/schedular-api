@@ -8,7 +8,7 @@ const scheduleApi = require('../models/schedule-model.js')
 const scheduleRouter = express.Router()
 
 // Login
-scheduleRouter.post('/dashboard', async (req, res) => {
+scheduleRouter.post('/', async (req, res) => {
   try {
     const verifiedUser = await scheduleApi.verifyAuth(req.body.username, req.body.password)
     return res.status(200).json(verifiedUser)
