@@ -9,12 +9,15 @@ export default class HelloWorld extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/helloworld')
+        this.getDashboard()
+    }
+
+    getDashboard = () => {
+        axios.get('/dashboard/:id')
             .then((res) => {
                 this.setState({message: res.data})
             })
     }
-
 
     render() {
         return (
