@@ -8,9 +8,12 @@ const scheduleApi = require('../models/schedule-model.js')
 const scheduleRouter = express.Router()
 
 // Login
-scheduleRouter.post('/', async (req, res) => {
+scheduleRouter.post('/verify', async (req, res) => {
+  console.log(req.body.username)
+  console.log(req.body.password)
   try {
     const verifiedUser = await scheduleApi.verifyAuth(req.body.username, req.body.password)
+    console.log(verifiedUser)
     return res.status(200).json(verifiedUser)
   } catch(e) {
     const message = 'Failed to verify user'

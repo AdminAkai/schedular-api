@@ -2,27 +2,32 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export default class HelloWorld extends Component {
+export default class Dashboard extends Component {
+
+    currentRoute = this.props.match.params.id
 
     state = {
-        message: ''
+        currentUserId: '',
+        currentUsername: '',
+        currentPassword: '',
+        currentEmail:'',
+        isAdmin: false,
     }
 
     componentDidMount() {
         this.getDashboard()
     }
 
-    getDashboard = () => {
-        axios.get('/dashboard/:id')
-            .then((res) => {
-                this.setState({message: res.data})
-            })
+    getDashboard = async () => {
+        const test = await axios.get(`/dashboard/${this.currentRoute}`)
+        this.setState(test)
     }
 
     render() {
         return (
             <div>
-                <h1>{this.state.message}</h1>
+                <h1>Hello World</h1>
+                <h1>{this.state.currentUsername}</h1>
             </div>
         )
     }

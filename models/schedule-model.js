@@ -16,8 +16,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  availability: Number,
   isAdmin: {
     type: Boolean,
+    default: false,
   },
 })
 
@@ -66,6 +68,9 @@ const verifyAuth = async (username, password) => {
   const verifyUser = await UserCollection.findOne({username: username})
   if (password === verifyUser.password) {
     return verifyUser
+  } else {
+    message = "error"
+    return message
   }
 }
 

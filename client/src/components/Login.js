@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
-export default class HelloWorld extends Component {
+export default class Login extends Component {
 
     state = {
         enteredUsername: '',
@@ -14,38 +14,42 @@ export default class HelloWorld extends Component {
 
     currentDashboard = `/dashboard/${this.state.currentUserId}`
 
+    renderRedirect = () => {
+        if (this.state.loggedIn) {
+            return <Redirect to={this.currentDashboard}></Redirect>
+        }
+    }
+
     onTextChange = (event) => {
         const previousData = { ...this.state }
         previousData[event.target.name] = event.target.value
+        console.log(`${event.target.name}: ${event.target.value}`)
         this.setState(previousData)
     }
 
     verifyData = async (event) => {
         event.preventDefault()
         const currentUser = {
-            name: this.state.enteredUsername,
+            username: this.state.enteredUsername,
             password: this.state.enteredPassword
         }
-        const verifiedUser = axios.post('/', currentUser)
-        console.log(currentUser)
-        if (verifiedUser) {
-            const currentId = verifiedUser._id
-            this.setState({currentUserId: currentId})
-            this.getDashboard()
+        const verifiedUser = await axios.post('/verify', currentUser)
+        console.log(verifiedUser)
+        console.log(verifiedUser.data._id)
+        if (verifiedUser.data !== 'error') {
+            this.setState({currentUserId: verifiedUser.data._id}, () => {
+                this.currentDashboard = `/dashboard/${this.state.currentUserId}`
+                this.setState({loggedIn: true})
+            })
         } else {
             alert('Username/Password incorrect')
         }
     }
 
-    getDashboard = () => {
-        const logIn = true
-        this.setState({loggedIn: logIn})
-    }
-
     render() {
         return (
             <div>
-                {this.state.loggedIn ? <Redirect to={this.currentDashboard}></Redirect> : null}
+                {this.renderRedirect()}
                 <h1>SCHEDUL&lambda;R</h1>
                 <div>
                 <form>
