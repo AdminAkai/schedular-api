@@ -7,18 +7,18 @@ const scheduleApi = require('../models/schedule-model.js')
 
 const scheduleRouter = express.Router()
 
-async function routeCurrentUser (id) {
-  try {
-    const user = await scheduleApi.getUser(id)
-    return res.status(200).json(user)
-  } catch(e) {
-    const message = 'Failed to get user'
-    res.status(500).json({
-      error: e,
-      message,
-    })
-  }
-}
+// async function routeCurrentUser (req, res) {
+//   try {
+//     const user = await scheduleApi.getUser(id)
+//     return res.status(200).json(user)
+//   } catch(e) {
+//     const message = 'Failed to get user'
+//     res.status(500).json({
+//       error: e,
+//       message,
+//     })
+//   }
+// }
 
 // Login
 scheduleRouter.post('/verify', async (req, res) => {
@@ -30,7 +30,7 @@ scheduleRouter.post('/verify', async (req, res) => {
     return res.status(200).json(verifiedUser)
   } catch(e) {
     const message = 'Failed to verify user'
-    res.status(500).json({
+    res.status(500).json({ 
       error: e,
       message,
     })
@@ -38,13 +38,59 @@ scheduleRouter.post('/verify', async (req, res) => {
 })
 
 // Dashboard of user
-scheduleRouter.get('/dashboard/:id', (req, res) => {
-  routeCurrentUser(req.params.id)
+scheduleRouter.get('/api/dashboard/:id', async (req, res) => {
+  try {
+    const user = await scheduleApi.getUser(req.params.id)
+    return res.status(200).json(user)
+  } catch(e) {
+    const message = 'Failed to get user'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
 })
 
 // Edit profile screen
-scheduleRouter.get('/dashboard/edit/:id', (req, res) => {
-  routeCurrentUser(req.params.id)
+scheduleRouter.get('/api/dashboard/edit/:id', async (req, res) => {
+  try {
+    const user = await scheduleApi.getUser(req.params.id)
+    return res.status(200).json(user)
+  } catch(e) {
+    const message = 'Failed to get user'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
+// Edit Profile
+scheduleRouter.put('/api/dashboard/edit:id', async (req, res) => {
+  try {
+    const editedUser = await scheduleApi.updateUser(req.params.id, req.body)
+    return res.status(200).json(editedUser)
+  } catch(e) {
+    const message = 'Failed to edit user'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
+// Delete Profile
+scheduleRouter.delete('/api/dashboard/delete/:id', async (req, res) => {
+  try {
+    const deletedUser = await scheduleRouterApi.deletedUser(req.params.id)
+    return res.status(200).json(editedUser)
+  } catch(e) {
+    const message = 'Failed to delete user'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
 })
 
 module.exports = {

@@ -20,14 +20,14 @@ export default class Dashboard extends Component {
     }
 
     getDashboard = async () => {
-        const test = await axios.get(`/dashboard/${this.currentRoute}`)
+        const test = await axios.get(`/api/dashboard/${this.currentRoute}`)
         this.setState(test.data)
     }
 
     render() {
         return (
-            <div>
-                <Navbar currentProfile={this.props.match.params.id}/>
+            <div className="component-container">
+                <Navbar currentProfile={this.props.match.params.id} editPage={false}/>
                 <h1>Hello World</h1>
                 <h1>{this.state.username}</h1>
             </div>

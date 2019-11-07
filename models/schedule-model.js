@@ -40,8 +40,32 @@ const SchedSchema = new mongoose.Schema({
   scheduledToId: mongoose.Types.ObjectId
 })
 
+const MessageSchema = new mongoose.Schema({
+  dateSent: {
+    type: Date,
+    required: true,
+  },
+  sentByName: {
+    type: String,
+    required: true,
+  },
+  sentToName: {
+    type: String,
+    required: true,
+  },
+  sentById: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
+  sentToId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  }
+})
+
 const UserCollection = mongoose.model('Users', UserSchema)
 const ScheduleCollection = mongoose.model('Schedule', SchedSchema)
+const MessageCollection = mongoose.model('Messages', MessageSchema)
 
 // User Model Functions
 const getAllUsers = () => {
@@ -108,6 +132,21 @@ const deleteSchedule = (id) => {
   return ScheduleCollection.deleteOne({_id: id})
 }
 
+// Message Model Functions
+const getAllMessages = async () => {
+  const messages = await MessageCollection.find({}).sort({dateSent: 'ascending'})
+  return messages
+}
+
+const sendMessage = async (newMessage) => {
+  const message = await MessageCollection.create(newMessage)
+  return message
+}
+
+const deleteMessage = (id) => {
+  return MessageCollection.deleteOne({_id: id})
+}
+
 module.exports = {
   getAllUsers,
   getUser,
@@ -120,5 +159,8 @@ module.exports = {
   getSchedule,
   addNewSchedule,
   updateSchedule,
-  deleteSchedule
+  deleteSchedule,
+  getAllMessages,
+  sendMessage,
+  deleteMessage
 }
