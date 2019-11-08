@@ -66,7 +66,7 @@ scheduleRouter.get('/api/dashboard/edit/:id', async (req, res) => {
 })
 
 // Edit Profile
-scheduleRouter.put('/api/dashboard/edit:id', async (req, res) => {
+scheduleRouter.put('/api/dashboard/edit/:id', async (req, res) => {
   try {
     const editedUser = await scheduleApi.updateUser(req.params.id, req.body)
     return res.status(200).json(editedUser)

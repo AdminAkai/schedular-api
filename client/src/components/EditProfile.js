@@ -21,6 +21,18 @@ export default class EditProfile extends Component {
         this.getEditProfileScreen()
     }
 
+    onTextChange = (event) => {
+        const previousData = { ...this.state }
+        previousData[event.target.name] = event.target.value
+        this.setState(previousData)
+    }
+
+    submitEdit = async (event) => {
+        const editedUser = { ...this.state }
+        const pushEdit = await axios.put(`/api/dashboard/edit/${this.props.match.params.id}`, editedUser)
+        this.getEditProfileScreen()
+    }
+
     getEditProfileScreen = async () => {
         const editScreen = await axios.get(`/api/dashboard/edit/${this.props.match.params.id}`)
         this.setState(editScreen.data)
@@ -36,28 +48,31 @@ export default class EditProfile extends Component {
                     <form>
                         <h4>Username</h4>
                         <input
-                            type="text"
+                            onChange={this.onTextChange}
                             name="username"
-                            required
+                            type="string"
+                            placeholder="New Username"
                         ></input>
                         <h4>Email</h4>
                         <input
-                            type="text"
+                            onChange={this.onTextChange}
                             name="email"
-                            required
+                            type="string"
+                            placeholder = "New Email"
                         ></input>
                         <h4>Change Password</h4>
                         <input
-                            type="password"
                             name="password"
-                            required
+                            onChange={this.onTextChange}
+                            type="password"
+                            placeholder="New Password"
                         ></input>
                         <input
                             type="submit"
                             value="Edit Profile"
+                            onClick={this.submitEdit}
                         ></input>
                     </form>
-                    <h4>{this.state.username}</h4>
                 </div>
             </div>
         )
