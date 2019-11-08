@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import axios from 'axios'
+import Navbar from './Navbar'
 
 export default class Messages extends Component {
 
@@ -9,13 +10,29 @@ export default class Messages extends Component {
     }
 
     componentDidMount() {
-        this.getMessages()
+        setInterval(this.getMessages(), 1000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.getMessages())
     }
 
     getMessages = async () => {
         const currentMessages = await axios.get(`/api/dashboard/messages/${this.props.match.params.id}`)
-        console.log(currentMessages)
-        this.setState({messages: currentMessages.data})
+        console.log(typeof(currentMessages.data))
+        if (typeof(currentMessages.data)  === 'array') {
+            this.setState({messages: currentMessages.data})
+        }
+    }
+
+    onTextChange = (event) => {
+        const previousData = { ...this.state }
+        previousData[event.target.name] = event.target.value
+        this.setState(previousData)
+    }
+
+    sendMessage = async (event) => {
+        const newMessage = { ...this.state }
     }
 
     render() {
@@ -27,8 +44,26 @@ export default class Messages extends Component {
 
         return (
             <div>
-                {allMessages}
-            </div>
+                <Navbar currentProfile={this.props.match.params.id} editPage={false}/>
+                <div className="message-box"> 
+                <div className="all-messages">
+                    {allMessages}
+                </div>
+                <form>
+                    <input
+                        className="hidden"
+                        type="date"
+                    ></input>
+                    <input
+                        type="text"
+                    ></input>
+                    <input
+                        type="submit"
+                        value="send"
+                    ></input>
+                </form>
+                </div>
+            </div>  
         )
     }
 }

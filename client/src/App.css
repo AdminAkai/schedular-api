@@ -37,8 +37,31 @@
   flex-direction: column;
 }
 
+.message-box {
+  padding: 20px;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  width:400px;
+  height: 700px;
+}
+
+.all-messages {
+  margin-bottom: 25px;
+  height: 90%;
+  width: 90%;
+  border: 1px solid #b1b1b1;
+}
+
 .username {
   margin-top: -12px;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .submit {
@@ -60,17 +83,15 @@
 }
 
 .navbar-container {
-  position: absolute;
-  width: 90%;
-  height: 20%;
+  position: relative;
   display: flex;
+  width: 100%;
   justify-content: flex-end;
   align-items: flex-start;
 }
 
 .navbar-items {
   display: flex;
-  
   margin: 10px;
 }
 
