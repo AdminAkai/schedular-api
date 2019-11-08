@@ -45,7 +45,7 @@ export default class EditProfile extends Component {
                 <Navbar isEditPage={this.state.isEditPage} currentProfile={this.props.match.params.id}/>
                 <div className="edit-profile">
                     <h3>Current Profile</h3>
-                    <form>
+                    <form className="form">
                         <h4>Username</h4>
                         <input
                             onChange={this.onTextChange}
@@ -68,6 +68,7 @@ export default class EditProfile extends Component {
                             placeholder="New Password"
                         ></input>
                         <input
+                            className="submit"
                             type="submit"
                             value="Edit Profile"
                             onClick={this.submitEdit}
