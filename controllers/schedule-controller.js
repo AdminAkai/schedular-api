@@ -7,19 +7,6 @@ const scheduleApi = require('../models/schedule-model.js')
 
 const scheduleRouter = express.Router()
 
-// async function routeCurrentUser (req, res) {
-//   try {
-//     const user = await scheduleApi.getUser(id)
-//     return res.status(200).json(user)
-//   } catch(e) {
-//     const message = 'Failed to get user'
-//     res.status(500).json({
-//       error: e,
-//       message,
-//     })
-//   }
-// }
-
 // Login
 scheduleRouter.post('/verify', async (req, res) => {
   console.log(req.body.username)
@@ -89,6 +76,20 @@ scheduleRouter.delete('/api/dashboard/delete/:id', async (req, res) => {
     res.status(500).json({
       error: e,
       message,
+    })
+  }
+})
+
+// View Messages
+scheduleRouter.get('/api/dashboard/messsages/:id', async (req, res) => {
+  try {
+    const userMessages = await scheduleApi.getUserMessages(req.params.id)
+    return res.status(200).json(userMessages)
+  } catch(e) {
+    const message = 'Failed to get user messages'
+    res.status(500).json({
+      error: e,
+      message,  
     })
   }
 })

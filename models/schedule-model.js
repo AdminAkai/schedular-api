@@ -138,6 +138,11 @@ const getAllMessages = async () => {
   return messages
 }
 
+const getUserMessages = async (id) => {
+  const userMessages = await MessageCollection.find({sentToId: id}).sort({dateSent: 'ascending'})
+  return userMessages
+}
+
 const sendMessage = async (newMessage) => {
   const message = await MessageCollection.create(newMessage)
   return message
@@ -161,6 +166,7 @@ module.exports = {
   updateSchedule,
   deleteSchedule,
   getAllMessages,
+  getUserMessages,
   sendMessage,
   deleteMessage
 }

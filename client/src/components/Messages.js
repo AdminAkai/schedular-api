@@ -13,14 +13,21 @@ export default class Messages extends Component {
     }
 
     getMessages = async () => {
-        const currentMessages = await axios.get('/api/')
+        const currentMessages = await axios.get(`/api/dashboard/messages/${this.props.match.params.id}`)
+        console.log(currentMessages)
+        this.setState({messages: currentMessages.data})
     }
 
     render() {
+        let allMessages = this.state.messages.map((message) => {
+            return (
+                <p>{message}</p>
+            )
+        })
+
         return (
             <div>
-                {/* Accessing the value of message from the state object */}
-                <h1>{this.state.message}</h1>
+                {allMessages}
             </div>
         )
     }
