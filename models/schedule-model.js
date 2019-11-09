@@ -41,8 +41,12 @@ const SchedSchema = new mongoose.Schema({
 })
 
 const MessageSchema = new mongoose.Schema({
+  messageContent: {
+    type: String,
+    required: true,
+  },
   dateSent: {
-    type: Date,
+    type: String,
     required: true,
   },
   sentByName: {
@@ -101,12 +105,6 @@ const verifyAuth = async (username, password) => {
 // Schedule Model Functions
 const getAllSchedules = async () => {
   const schedules = await ScheduleCollection.find({}).sort({dateScheduled: 'ascending'})
-  // const newSchedules = schedules.map((schedule, i) => {
-  //   schedule.dateScheduled =  moment(dateScheduled).format()
-  //   // let parsedDate = schedule[i].dateScheduled.split(' ')
-  //   // parsedDate.splice(4, (parsedDate.length - 4))
-  //   // schedule[i].dateScheduled.join(' ')
-  // })
   return schedules
 }
 
@@ -139,7 +137,7 @@ const getAllMessages = async () => {
 }
 
 const getUserMessages = async (id) => {
-  const userMessages = await MessageCollection.find({sentToId: id}).sort({dateSent: 'ascending'})
+  const userMessages = await MessageCollection.find({sentById: id}).sort({dateSent: 'ascending'})
   return userMessages
 }
 

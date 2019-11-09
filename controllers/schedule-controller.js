@@ -81,7 +81,7 @@ scheduleRouter.delete('/api/dashboard/delete/:id', async (req, res) => {
 })
 
 // View Messages
-scheduleRouter.get('/api/dashboard/messsages/:id', async (req, res) => {
+scheduleRouter.get('/api/messages/:id', async (req, res) => {
   try {
     const userMessages = await scheduleApi.getUserMessages(req.params.id)
     return res.status(200).json(userMessages)
@@ -90,6 +90,48 @@ scheduleRouter.get('/api/dashboard/messsages/:id', async (req, res) => {
     res.status(500).json({
       error: e,
       message,  
+    })
+  }
+})
+
+// Create Message
+scheduleRouter.post('/api/send-message', async (req, res) => {
+  try {
+    const newMessage = await scheduleApi.sendMessage(req.body)
+    return res.status(200).json(newMessage)
+  } catch(e) {
+    const message = 'Failed to send message'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
+// Get Users
+scheduleRouter.get('/api/getusers/', async (req, res) => {
+  try {
+    const allUsers = await scheduleApi.getAllUsers()
+    return res.status(200).json(allUsers)
+  } catch(e) {
+    const message = 'Failed to get users'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
+// Get User
+scheduleRouter.get('/api/getusers/:id', async (req, res) => {
+  try {
+    const user = await scheduleApi.getUser(req.params.id)
+    return res.status(200).json(user)
+  } catch(e) {
+    const message = 'Failed to get user'
+    res.status(500).json({
+      error: e,
+      message,
     })
   }
 })

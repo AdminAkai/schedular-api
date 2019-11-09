@@ -29,7 +29,7 @@ export default class EditProfile extends Component {
 
     submitEdit = async (event) => {
         const editedUser = { ...this.state }
-        const pushEdit = await axios.put(`/api/dashboard/edit/${this.props.match.params.id}`, editedUser)
+        await axios.put(`/api/dashboard/edit/${this.props.match.params.id}`, editedUser)
         alert('Profile Edited!')
         this.getEditProfileScreen()
     }

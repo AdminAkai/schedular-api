@@ -56,12 +56,28 @@
   border: 1px solid #b1b1b1;
 }
 
+.message-container {
+  margin-bottom: 10px;
+}
+
+.message {
+  letter-spacing: 0.1em;
+}
+
+.date-subtext {
+  font-size: 10px;
+  margin-top: -12px;
+  letter-spacing: 0.1em;
+}
+
 .username {
   margin-top: -12px;
 }
 
 .hidden {
+  display: none;
   visibility: hidden;
+  pointer-events: none;
 }
 
 .submit {
