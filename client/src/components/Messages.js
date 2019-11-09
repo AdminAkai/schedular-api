@@ -7,6 +7,7 @@ import Navbar from './Navbar'
 export default class Messages extends Component {
 
     state = {
+        isMessages: true,
         messages: [],
         allUsers: [],
         messageContent: '',
@@ -103,7 +104,7 @@ export default class Messages extends Component {
         return (
 
             <div>
-                <Navbar currentProfile={this.props.match.params.id} editPage={false}/>
+                <Navbar currentProfile={this.props.match.params.id} editPage={false} messagesPage={this.state.isMessages}/>
                 <select name="sentToId" onChange={this.setSendData}>
                     {differentUsers}
                 </select>

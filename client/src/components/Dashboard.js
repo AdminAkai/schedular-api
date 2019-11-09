@@ -20,8 +20,8 @@ export default class Dashboard extends Component {
     }
 
     getDashboard = async () => {
-        const test = await axios.get(`/api/dashboard/${this.currentRoute}`)
-        this.setState(test.data)
+        const currentDashboard = await axios.get(`/api/dashboard/${this.currentRoute}`)
+        this.setState(currentDashboard.data)
     }
 
     render() {

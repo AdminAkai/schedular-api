@@ -16,7 +16,16 @@ export default class Navbar extends Component {
         return (
             <div className="navbar-container">
                 <div className="navbar-items">
-                    <Link className="navbar-option" to={this.viewMessages}>Messages</Link>
+                    {this.props.messagesPage === true
+                    ? 
+                        <Link className="navbar-option" to={this.returnToDashboard}>
+                            Return to Dashboard
+                        </Link>
+                    :
+                        <Link className="navbar-option" to={this.viewMessages}>
+                            Messages
+                        </Link>
+                    }
                     {this.props.isEditPage === true
                     ? 
                         <Link className="navbar-option" to={this.returnToDashboard}>
