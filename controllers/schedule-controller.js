@@ -140,7 +140,7 @@ scheduleRouter.get('/api/getusers/:id', async (req, res) => {
 scheduleRouter.get('/api/getschedules', async (req, res) => {
   try {
     const allSchedules = await scheduleApi.getAllSchedules(req.params.id)
-    return res.status(200).json(allSchedules)
+    return res.status(200).json(allSchedules) 
   } catch(e) {
     const message = 'Failed to get all schedules'
     res.status(500).json({

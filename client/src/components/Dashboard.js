@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Navbar from './Navbar.js'
+import Schedular from './Schedular.js'
 
 export default class Dashboard extends Component {
 
@@ -28,6 +29,7 @@ export default class Dashboard extends Component {
         return (
             <div className="component-container">
                 <Navbar currentProfile={this.props.match.params.id} editPage={false}/>
+                <Schedular />
                 <h1>Hello World</h1>
                 <h1>{this.state.username}</h1>
             </div>

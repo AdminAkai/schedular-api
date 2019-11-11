@@ -13,14 +13,16 @@ export default class Navbar extends Component {
     viewMessages = `/dashboard/messages/${this.props.currentProfile}`
 
     render() {
+
         return (
             <div className="navbar-container">
                 <div className="navbar-items">
+                    {this.props.createSchedulePage === true}
                     {this.props.messagesPage === true
                     ? 
                         <Link className="navbar-option" to={this.returnToDashboard}>
                             Return to Dashboard
-                        </Link>
+                        </Link>                    
                     :
                         <Link className="navbar-option" to={this.viewMessages}>
                             Messages

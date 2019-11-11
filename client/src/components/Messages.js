@@ -86,12 +86,21 @@ export default class Messages extends Component {
 
     render() {
         const allMessages = this.state.messages.map((message, i) => {
-            return (
-                <div className="message-container  ">
-                    <p key={message._id} className="message">{message.sentByName}: {message.messageContent}</p>
-                    <p key={i} className="date-subtext">Sent: {message.dateSent}</p>
-                </div>
-            )
+            if (message.sentById === this.state.sentById) {
+                return (
+                    <div className="message-container-user">
+                        <p key={message._id} className="message">{message.messageContent}</p>
+                        <p key={i} className="date-subtext-user">Sent: {message.dateSent}</p>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="message-container">
+                        <p key={message._id} className="message">{message.sentByName}: {message.messageContent}</p>
+                        <p key={i} className="date-subtext">Sent: {message.dateSent}</p>
+                    </div>
+                )
+            }
         })
 
         
@@ -105,20 +114,21 @@ export default class Messages extends Component {
 
             <div>
                 <Navbar currentProfile={this.props.match.params.id} editPage={false} messagesPage={this.state.isMessages}/>
-                <select name="sentToId" onChange={this.setSendData}>
+                <select className="select-name" name="sentToId" onChange={this.setSendData}>
                     {differentUsers}
                 </select>
                 <div className="message-box"> 
-                <div className="all-messages">
-                    {allMessages}
-                </div>
-                <form>
-                    <input
+                    <div className="all-messages">
+                        {allMessages}
+                    </div>
+                    <form className="message-form">
+                    <textarea
                         type="text"
                         name="messageContent"
                         onChange={this.onTextChange}
-                    ></input>
+                    ></textarea>
                     <input
+                        className="submit-messages"
                         type="submit"
                         value="send"
                         onClick={this.sendMessage}

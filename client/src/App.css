@@ -7,6 +7,7 @@
   width: 100vw;
   height: 100vh;
   background-color: #00a2ff;
+  overflow: hidden;
 }
 
 .component-container {
@@ -37,6 +38,8 @@
   flex-direction: column;
 }
 
+
+/* Messages */
 .message-box {
   padding: 20px;
   background: #ffffff;
@@ -45,8 +48,8 @@
   justify-content: flex-end;
   align-items: center;
   flex-direction: column;
-  width:400px;
-  height: 700px;
+  width:1000px;
+  height: 600px;
 }
 
 .all-messages {
@@ -54,21 +57,82 @@
   height: 90%;
   width: 90%;
   border: 1px solid #b1b1b1;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.all-messages::-webkit-scrollbar {
+  width: 0px;
 }
 
 .message-container {
   margin-bottom: 10px;
 }
 
+.message-container-user {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-bottom: 25px;
+}
+
+
 .message {
   letter-spacing: 0.1em;
+  margin-top: -1px;
 }
 
 .date-subtext {
   font-size: 10px;
-  margin-top: -12px;
+  margin-top: -17px;
   letter-spacing: 0.1em;
 }
+
+.date-subtext-user {
+  font-size: 10px;
+  margin-top: -17px;
+  letter-spacing: 0.1em;
+}
+
+.select-name {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+  font-size: 18px;
+  color: #60666d;
+}
+
+.message-form {
+  padding: 20px;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.submit-messages {
+  margin-left: 5px;
+  border: 1px solid #ffffff;
+  font-size: 18px;
+  padding: 10px;
+  font-weight: 600;
+  background: #ffffff;
+}
+
+.submit-messages:hover {
+  background: rgba(0, 247, 255, 0.5);
+  border: 1px solid rgba(0, 247, 255, 0.5);
+}
+
+/* End of Messages */
 
 .username {
   margin-top: -12px;
@@ -172,3 +236,5 @@
 .text-shadow {
   text-shadow: 2px 2px #525151;
 }
+
+
