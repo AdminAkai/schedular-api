@@ -69,8 +69,8 @@ export default class Login extends Component {
         return (
             <div>
                 {this.renderRedirect()}
-                <h1 className="schedular text-shadow">SCHEDUL&lambda;R</h1>
                 <div className="login animated animatedFadeInUp fadeInUp">
+                    <h1 className="schedular text-shadow">SCHEDUL&lambda;R</h1>
                     <form className="form shadow">
                         <h4>Username</h4>
                         <input

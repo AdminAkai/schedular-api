@@ -56,7 +56,7 @@ export default class HelloWorld extends Component {
                     isCreateUserPage={this.state.createUserPage} 
                     isAdmin={this.state.isAdmin}
                 />
-                <div>
+                <div className="create-user">
                     <form className="form">
                         <h3>New Username</h3>
                         <input

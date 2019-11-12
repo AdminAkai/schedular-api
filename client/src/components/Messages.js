@@ -19,12 +19,18 @@ export default class Messages extends Component {
         sentToId: '',
     }
 
+    messagesEndRef = React.createRef()
+
     componentDidMount() {
         this.setUser()
         this.getDifferentUsers()
         setInterval(this.getMessages, 1000)
         setInterval(this.setDateTime, 1000)
     }
+
+    // componentDidUpdate() {
+    //     this.scrollToBottom()
+    // }
 
     componentWillUnmount() {
         clearInterval(this.getMessages())
@@ -37,9 +43,15 @@ export default class Messages extends Component {
         this.setState({dateSent: formatdateTime})
     }
 
+    scrollToBottom = () => {
+        this.messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+
     getMessages = async () => {
         const currentMessages = await axios.get(`/api/messages/${this.props.match.params.id}`)
-        this.setState({messages: currentMessages.data})
+        if (currentMessages.data.length > this.state.messages.length) {
+            this.setState({messages: currentMessages.data}, this.scrollToBottom)
+        }
     }
 
     setUser = async () => {
@@ -47,8 +59,6 @@ export default class Messages extends Component {
         const currentUserInfo = {
             sentById: currentUser.data._id,
             sentByName: currentUser.data.username,
-            sentToId: currentUser.data._id,
-            sentToName: currentUser.data.username
         }
         this.setState(currentUserInfo)
     }
@@ -60,6 +70,7 @@ export default class Messages extends Component {
     }
 
     setSendData = (event) => {
+        console.log(event.target.value)
         this.setState({sentToId: event.target.value}, async () => {
             const sentUserData = await axios.get(`/api/getusers/${this.state.sentToId}`)
             this.setState({sentToName: sentUserData.data.username})
@@ -83,7 +94,9 @@ export default class Messages extends Component {
             sentToId: this.state.sentToId,
          }
          await axios.post('/api/send-message', newMessage)
+         this.setState({messageContent: ''})
          this.getMessages()
+         this.scrollToBottom()
     }
 
     render() {
@@ -116,28 +129,31 @@ export default class Messages extends Component {
 
             <div>
                 <Navbar currentProfile={this.props.match.params.id} editPage={false} messagesPage={this.state.isMessages}/>
-                <select className="select-name" name="sentToId" onChange={this.setSendData}>
-                    {differentUsers}
-                </select>
-                <div className="message-box"> 
-                    <div className="all-messages">
-                        {allMessages}
+                <div className="message-area">
+                    <h1>Current user: {this.state.sentByName}</h1>
+                    <select className="select-name" name="sentToId" onChange={this.setSendData}>
+                        {differentUsers}
+                    </select>
+                    <div className="message-box"> 
+                        <div className="all-messages">
+                            {allMessages}
+                            <div ref={this.messagesEndRef} />
+                        </div>
+                        <form className="message-form">
+                            <input
+                                type="text"
+                                name="messageContent"
+                                onChange={this.onTextChange}
+                                value={this.state.messageContent}
+                            ></input>
+                            <input
+                                className="submit-messages"
+                                type="submit"
+                                value="send"
+                                onClick={this.sendMessage}
+                            ></input>
+                        </form>
                     </div>
-                    <form className="message-form">
-                    <textarea
-                        rows="2"
-                        cols="50"
-                        type="text"
-                        name="messageContent"
-                        onChange={this.onTextChange}
-                    ></textarea>
-                    <input
-                        className="submit-messages"
-                        type="submit"
-                        value="send"
-                        onClick={this.sendMessage}
-                    ></input>
-                </form>
                 </div>
             </div>  
         )
