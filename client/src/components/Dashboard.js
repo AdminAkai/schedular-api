@@ -31,13 +31,15 @@ export default class Dashboard extends Component {
 
     render() {
         return (
-            <div className="component-container">
+            <div>
                 <Navbar 
                     currentProfile={this.props.match.params.id} 
                     isAdmin={this.state.isAdmin}
                 />
-                <button onClick={this.generateSchedule}></button>
-                <Schedular />
+                <div className="component-container">
+                    <button onClick={this.generateSchedule}>Generate Schedule</button>
+                    <Schedular />
+                </div>
             </div>
         )
     }

@@ -56,46 +56,48 @@ export default class HelloWorld extends Component {
                     isCreateUserPage={this.state.createUserPage} 
                     isAdmin={this.state.isAdmin}
                 />
-                <form className="form">
-                    <h3>New Username</h3>
-                    <input
-                        type="text"
-                        name="newUsername"
-                        onChange={this.onTextChange}
-                        value={this.state.newUsername}
-                    ></input>
-                    <h3>New Password</h3>
-                    <input
-                        type="password"
-                        name="newPassword"
-                        onChange={this.onTextChange}
-                        value={this.state.newPassword}
-                    ></input>
-                    <h3>New Email</h3>
-                    <input
-                        type="text"
-                        name="newEmail"
-                        onChange={this.onTextChange}
-                        value={this.state.newEmail}
-                    ></input>
-                    <h3>Availability (Total Work Hours in 7 Day Week)</h3>
-                    <input
-                        type="number"
-                        name="newAvailability"
-                        onChange={this.onTextChange}
-                        value={this.state.newAvailability}
-                    ></input>
-                    <h3>Admin</h3>
-                    <select name="newIsAdmin">
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    <input
-                        type="submit"
-                        value="Create User"
-                        onClick={this.submitNewUser}
-                    ></input>
-                </form>
+                <div>
+                    <form className="form">
+                        <h3>New Username</h3>
+                        <input
+                            type="text"
+                            name="newUsername"
+                            onChange={this.onTextChange}
+                            value={this.state.newUsername}
+                        ></input>
+                        <h3>New Password</h3>
+                        <input
+                            type="password"
+                            name="newPassword"
+                            onChange={this.onTextChange}
+                            value={this.state.newPassword}
+                        ></input>
+                        <h3>New Email</h3>
+                        <input
+                            type="text"
+                            name="newEmail"
+                            onChange={this.onTextChange}
+                            value={this.state.newEmail}
+                        ></input>
+                        <h3>Availability (Total Work Hours in 7 Day Week)</h3>
+                        <input
+                            type="number"
+                            name="newAvailability"
+                            onChange={this.onTextChange}
+                            value={this.state.newAvailability}
+                        ></input>
+                        <h3>Admin</h3>
+                        <select name="newIsAdmin">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <input
+                            type="submit"
+                            value="Create User"
+                            onClick={this.submitNewUser}
+                        ></input>
+                    </form>
+                </div>
             </div>
         )
     }

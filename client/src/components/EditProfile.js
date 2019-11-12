@@ -42,7 +42,7 @@ export default class EditProfile extends Component {
 
     render() {
         return (
-            <div className="component-container">
+            <div>
                 <Navbar 
                     isEditPage={this.state.isEditPage} 
                     currentProfile={this.props.match.params.id}

@@ -1,9 +1,6 @@
 .App {
   font-family: 'Dosis', sans-serif;
   letter-spacing: 0.1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100vw;
   height: 100vh;
   background-color: #2898d8;
@@ -11,8 +8,14 @@
 }
 
 .component-container {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  margin-top: 200px;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .schedular {
@@ -30,8 +33,8 @@
 
 .form {
   padding: 20px;
+  width: 400px;
   background: #ffffff;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,12 +169,23 @@
   margin-top: -12px;
 }
 
+.navbar {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: row;
+  width: 100vw;
+  height: 20vh;
+}
+
 .navbar-container {
   position: relative;
   display: flex;
   width: 100%;
   justify-content: flex-end;
   align-items: flex-start;
+  flex-direction: row;
 }
 
 .navbar-items {
@@ -185,11 +199,15 @@
 }
 
 .edit-profile {
+  width: 50%;
+  height: 50%;
+  margin-top: 200px;
+  margin-left: 500px;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 70%;
 }
 
 @keyframes fadeInUp {
