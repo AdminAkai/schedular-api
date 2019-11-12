@@ -27,6 +27,7 @@ export default class Messages extends Component {
 
     componentWillUnmount() {
         clearInterval(this.getMessages())
+        clearInterval(this.setDateTime, 1000)
     }
 
     setDateTime = () => {
@@ -63,6 +64,7 @@ export default class Messages extends Component {
             const sentUserData = await axios.get(`/api/getusers/${this.state.sentToId}`)
             this.setState({sentToName: sentUserData.data.username})
         })
+        this.setUser()
     }
 
     getDifferentUsers = async () => {
@@ -93,7 +95,7 @@ export default class Messages extends Component {
                         <p key={i} className="date-subtext-user">Sent: {message.dateSent}</p>
                     </div>
                 )
-            } else {
+            } else if (message.sentById === this.state.sentToId) {
                 return (
                     <div className="message-container">
                         <p key={message._id} className="message">{message.sentByName}: {message.messageContent}</p>

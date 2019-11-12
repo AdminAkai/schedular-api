@@ -137,7 +137,7 @@ const getAllMessages = async () => {
 }
 
 const getUserMessages = async (id) => {
-  const userMessages = await MessageCollection.find({sentById: id, sentToId: id}).sort({dateSent: 'ascending'})
+  const userMessages = await MessageCollection.find({}).sort({dateSent: 'ascending'})
   return userMessages
 }
 
