@@ -27,16 +27,7 @@ export default class Navbar extends Component {
                             Create User
                         </Link>
                     }
-                    {this.props.isCreateSchedulePage === true
-                    ? 
-                        <Link className="navbar-option" to={this.returnToDashboard}>
-                            Return to Dashboard
-                        </Link>
-                    :
-                        <Link className="navbar-option" to={this.editProfile}>
-                            Create Schedule
-                        </Link>
-                    }                    {this.props.messagesPage === true
+                    {this.props.messagesPage === true
                     ? 
                         <Link className="navbar-option" to={this.returnToDashboard}>
                             Return to Dashboard
