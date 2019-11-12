@@ -92,8 +92,8 @@ const deleteUser = (id) => {
   return UserCollection.deleteOne({_id: id})
 }
 
-const getAdmins = () => {
-  return UserCollection.find({isAdmin: true})
+const getAdmin = () => {
+  return UserCollection.find({username: "admin"})
 }
 
 const verifyAuth = async (username, password) => {
@@ -159,7 +159,7 @@ module.exports = {
   getUser,
   addNewUser,
   updateUser,
-  getAdmins,
+  getAdmin,
   deleteUser,
   verifyAuth,
   getAllSchedules,

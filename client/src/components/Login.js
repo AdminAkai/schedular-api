@@ -20,7 +20,7 @@ export default class Login extends Component {
 
     seedAdminData = async () => {
         const adminExist = await axios.get('/api/getadmin/')
-        if (adminExist) {
+        if (adminExist.data[0]) {
             console.log('Admin account exists')
         } else {
             const Admin = {
