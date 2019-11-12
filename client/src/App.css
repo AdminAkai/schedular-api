@@ -50,6 +50,7 @@
   flex-direction: column;
   width:1000px;
   height: 600px;
+  border: 1px solid #b1b1b1;
 }
 
 .all-messages {
@@ -66,7 +67,7 @@
 }
 
 .message-container {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   margin-left: 5px;
   margin-top: 5px;
 }
@@ -122,7 +123,7 @@
 
 .submit-messages {
   margin-left: 5px;
-  border: 1px solid #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   font-size: 18px;
   padding: 10px;
   font-weight: 600;

@@ -125,6 +125,8 @@ export default class Messages extends Component {
                     </div>
                     <form className="message-form">
                     <textarea
+                        rows="10"
+                        cols="50"
                         type="text"
                         name="messageContent"
                         onChange={this.onTextChange}

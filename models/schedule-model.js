@@ -46,7 +46,7 @@ const MessageSchema = new mongoose.Schema({
     required: true,
   },
   dateSent: {
-    type: String,
+    type: Date,
     required: true,
   },
   sentByName: {
