@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Navbar from './Navbar'
+import moment from 'moment'
 
 
 
@@ -31,11 +32,9 @@ export default class Messages extends Component {
     }
 
     setDateTime = () => {
-        var today = new Date()
-        var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate()
-        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds()
-        var dateTime = date+' '+time
-        this.setState({dateSent: dateTime})
+        const dateTime = new Date();
+        let formatdateTime = moment(dateTime).format("YYYY-MM-DD HH:mm:ss")
+        this.setState({dateSent: formatdateTime})
     }
 
     getMessages = async () => {
@@ -92,7 +91,7 @@ export default class Messages extends Component {
                 return (
                     <div className="message-container-user">
                         <p key={message._id} className="message">{message.messageContent}</p>
-                        <p key={i} className="date-subtext-user">Sent: {message.dateSent}</p>
+                        <p key={i} className="date-subtext-user">Sent: {moment(message.dateSent).format("YYYY-MM-DD HH:mm:ss")}</p>
                     </div>
                 )
             } else if (message.sentById === this.state.sentToId) {
@@ -125,7 +124,7 @@ export default class Messages extends Component {
                     </div>
                     <form className="message-form">
                     <textarea
-                        rows="10"
+                        rows="2"
                         cols="50"
                         type="text"
                         name="messageContent"
