@@ -32,7 +32,10 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div className="component-container">
-                <Navbar currentProfile={this.props.match.params.id} editPage={false}/>
+                <Navbar 
+                    currentProfile={this.props.match.params.id} 
+                    isAdmin={this.state.isAdmin}
+                />
                 <button onClick={this.generateSchedule}></button>
                 <Schedular />
             </div>

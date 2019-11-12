@@ -14,6 +14,25 @@ export default class Login extends Component {
 
     currentDashboard = `/dashboard/${this.state.currentUserId}`
 
+    componentDidMount() {
+        this.seedAdminData()
+    }
+
+    seedAdminData = async () => {
+        const adminExist = await axios.get('/api/getadmin/')
+        if (adminExist) {
+            console.log('Admin account exists')
+        } else {
+            const Admin = {
+                username: 'admin',
+                password: 'admin',
+                email: 'admin@admin.com',
+                isAdmin: true
+            }
+            await axios.post('/api/createuser/', Admin)
+        }
+    }
+
     renderRedirect = () => {
         if (this.state.loggedIn) {
             return <Redirect to={this.currentDashboard}></Redirect>

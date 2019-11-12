@@ -1,48 +1,101 @@
-/* Step 1 import React, { Component } and axios
- *
- */
+
 import React, { Component } from 'react'
 import axios from 'axios'
+import Navbar from './Navbar'
 
-/* Step 2
- * Rename this class to reflect the component being created
- *
- */
 export default class HelloWorld extends Component {
 
-    /* Step 3
-    * Create a state for the component to store view data
-    *
-    */
+
     state = {
-        message: ''
+        createUserPage: true,
+        newUsername: "",
+        newPassword: "",
+        newEmail: "",
+        newAvailability: 0,
+        newIsAdmin: false,
+        isAdmin: false
     }
 
-    /* Step 4
-    * Use componentDidMount to retrieve any data to display
-    *   Here you can make calls to your local express server
-    *   or to an external API
-    *   setState can be run here as well
-    *   -REMINDER remember `setState` it is an async function
-    */
+
     componentDidMount() {
-        axios.get('/api/helloworld')
-            .then((res) => {
-                this.setState({message: res.data})
-            })
+        this.setUser()
     }
 
-    /* Step 5
-    *  The render function manages what is shown in the browser
-    *  TODO: delete the jsx returned
-    *   and replace it with your own custom jsx template
-    *
-    */
+    setUser = async () => {
+        const currentUser = await axios.get(`/api/getusers/${this.props.match.params.id}`) 
+        const currentUserInfo = {
+            isAdmin: currentUser.data.isAdmin
+        }
+        this.setState(currentUserInfo)
+    }
+
+    onTextChange = (event) => {
+        const previousData = { ...this.state }
+        previousData[event.target.name] = event.target.value
+        this.setState(previousData)
+    }
+
+    submitNewUser = async (event) => {
+        event.preventDefault()
+        const newUser = { 
+            username: this.state.newUsername,
+            password: this.state.newPassword,
+            email: this.state.newEmail,
+            availability: this.state.newAvailability,
+            isAdmin: this.state.newIsAdmin
+        }
+        await axios.post(`/api/createuser/`, newUser)
+        alert('Profile created!')
+    }
+
     render() {
         return (
             <div>
-                {/* Accessing the value of message from the state object */}
-                <h1>{this.state.message}</h1>
+                <Navbar 
+                    currentProfile={this.props.match.params.id} 
+                    isCreateUserPage={this.state.createUserPage} 
+                    isAdmin={this.state.isAdmin}
+                />
+                <form className="form">
+                    <h3>New Username</h3>
+                    <input
+                        type="text"
+                        name="newUsername"
+                        onChange={this.onTextChange}
+                        value={this.state.newUsername}
+                    ></input>
+                    <h3>New Password</h3>
+                    <input
+                        type="password"
+                        name="newPassword"
+                        onChange={this.onTextChange}
+                        value={this.state.newPassword}
+                    ></input>
+                    <h3>New Email</h3>
+                    <input
+                        type="text"
+                        name="newEmail"
+                        onChange={this.onTextChange}
+                        value={this.state.newEmail}
+                    ></input>
+                    <h3>Availability (Total Work Hours in 7 Day Week)</h3>
+                    <input
+                        type="number"
+                        name="newAvailability"
+                        onChange={this.onTextChange}
+                        value={this.state.newAvailability}
+                    ></input>
+                    <h3>Admin</h3>
+                    <select name="newIsAdmin">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <input
+                        type="submit"
+                        value="Create User"
+                        onClick={this.submitNewUser}
+                    ></input>
+                </form>
             </div>
         )
     }

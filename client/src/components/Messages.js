@@ -56,7 +56,6 @@ export default class Messages extends Component {
     onTextChange = (event) => {
         const previousData = { ...this.state }
         previousData[event.target.name] = event.target.value
-        console.log(`${event.target.name}: ${event.target.value}`)
         this.setState(previousData)
     }
 

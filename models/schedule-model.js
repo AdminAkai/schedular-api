@@ -92,6 +92,10 @@ const deleteUser = (id) => {
   return UserCollection.deleteOne({_id: id})
 }
 
+const getAdmins = () => {
+  return UserCollection.find({isAdmin: true})
+}
+
 const verifyAuth = async (username, password) => {
   const verifyUser = await UserCollection.findOne({username: username})
   if (password === verifyUser.password) {
@@ -155,6 +159,7 @@ module.exports = {
   getUser,
   addNewUser,
   updateUser,
+  getAdmins,
   deleteUser,
   verifyAuth,
   getAllSchedules,

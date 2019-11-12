@@ -136,6 +136,20 @@ scheduleRouter.get('/api/getusers/', async (req, res) => {
   }
 })
 
+// Get Admin
+scheduleRouter.get('/api/getadmin/', async (req, res) => {
+  try {
+    const allAdmins = await scheduleApi.getAdmins()
+    return res.status(200).json(allAdmins)
+  } catch(e) {
+    const message = 'Failed to get admins'
+    res.status(500).json({
+      error: e,
+      message
+    })
+  }
+})
+
 // Get User
 scheduleRouter.get('/api/getusers/:id', async (req, res) => {
   try {
