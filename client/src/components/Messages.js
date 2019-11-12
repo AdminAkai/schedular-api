@@ -46,7 +46,9 @@ export default class Messages extends Component {
         const currentUser = await axios.get(`/api/getusers/${this.props.match.params.id}`) 
         const currentUserInfo = {
             sentById: currentUser.data._id,
-            sentByName: currentUser.data.username
+            sentByName: currentUser.data.username,
+            sentToId: currentUser.data._id,
+            sentToName: currentUser.data.username
         }
         this.setState(currentUserInfo)
     }

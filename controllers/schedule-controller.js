@@ -108,6 +108,20 @@ scheduleRouter.post('/api/send-message', async (req, res) => {
   }
 })
 
+// Create User
+scheduleRouter.post('/api/createuser/', async (req, res) => {
+  try {
+    const newUser = await scheduleApi.addNewUser(req.body)
+    return res.status(200).json(newUser)
+  } catch(e) {
+    const message = 'Failed to create user'
+    res.status(500).json({
+      error: e,
+      message
+    })
+  }
+})
+
 // Get Users
 scheduleRouter.get('/api/getusers/', async (req, res) => {
   try {
@@ -129,6 +143,20 @@ scheduleRouter.get('/api/getusers/:id', async (req, res) => {
     return res.status(200).json(user)
   } catch(e) {
     const message = 'Failed to get user'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
+// Create schedule
+scheduleRouter.post('api/createschedule', async(req, res) => {
+  try {
+    const newSchedule = await scheduleApi.addNewSchedule(req.body)
+    return res.status(200).json(newSchedule)
+  } catch(e) {
+    const message = 'Failed to create schedule'
     res.status(500).json({
       error: e,
       message,

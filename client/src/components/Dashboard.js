@@ -25,13 +25,16 @@ export default class Dashboard extends Component {
         this.setState(currentDashboard.data)
     }
 
+    // generateSchedule = async () => {
+
+    // }
+
     render() {
         return (
             <div className="component-container">
                 <Navbar currentProfile={this.props.match.params.id} editPage={false}/>
+                <button onClick={this.generateSchedule}></button>
                 <Schedular />
-                <h1>Hello World</h1>
-                <h1>{this.state.username}</h1>
             </div>
         )
     }
