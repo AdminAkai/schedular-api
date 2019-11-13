@@ -25,6 +25,7 @@ export default class Schedular extends Component {
     }
 
     specificDashboard = `/dashboard/schedule/${this.props.currentUser}/`
+    toMessages = `/dashboard/messages/${this.props.currentUser}`
 
     deleteSchedule = async (event) => {
       event.preventDefault()
@@ -40,7 +41,7 @@ export default class Schedular extends Component {
           <h4>Scheduled To:</h4>
           <p>{schedule.scheduledToName}</p>
           <Link className="submit" to={scheduleId}>Edit Schedule</Link>
-          <Link className="submit" to={this.viewMessages}>Conflict</Link>      
+          <Link className="submit" to={this.toMessages}>Conflict</Link>      
           <button
             className="submit"
             onClick={this.deleteSchedule}
