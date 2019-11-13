@@ -328,3 +328,14 @@
   align-items: center;
   flex-direction: column;
 }
+
+.schedule-container {
+  position: absolute;
+  margin-top: 200px;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

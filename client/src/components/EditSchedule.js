@@ -7,6 +7,8 @@ export default class EditSchedule extends Component {
 
 
     state = {
+        allUsers: [],
+        currentDate: '',
         currentUserAdmin: false,
         currentScheduleId: '',
         dateScheduled: '',
@@ -16,6 +18,15 @@ export default class EditSchedule extends Component {
 
 
     componentDidMount() {
+        this.getDifferentUsers()
+        this.setDateTime()
+    }
+
+    setDateTime = () => {
+        const dateTime = new Date();
+        let formatdateTime = moment(dateTime).format("YYYY-MM-DD")
+        this.setState({currentDate: formatdateTime})
+        return formatdateTime
     }
 
     getCurrentSchedule = async () => {
@@ -28,12 +39,23 @@ export default class EditSchedule extends Component {
         this.setState({thisSchedule})
     }
 
+    getDifferentUsers = async () => {
+        const allUsers = await axios.get('/api/getusers/')
+        this.setState({allUsers: allUsers.data}) 
+    }
+
     getCurrentUser = async () => {
         const currentUser = await axios.get(`/api/getusers/${this.props.match.id}`)
         this.setState({currentUserAdmin: currentUser.data.isAdmin})
     }
 
     render() {
+
+        const differentUsers = this.state.allUsers.map((users) => {
+            return (
+                <option key={users._id} value={users._id}>{users.username}</option>
+            )
+        })
 
         let formatdateTime = moment(this.state.dateScheduled).format("YYYY-MM-DD")
 
@@ -43,9 +65,14 @@ export default class EditSchedule extends Component {
                     currentProfile={this.props.match.params.id} 
                     isAdmin={this.state.isAdmin}
                 />                
-                <div className="calendar-container">
+                <div className="schedule-container">
                     <h4>Scheduled To:</h4>
                     <p>{this.state.scheduledToName}</p>
+                    <form>
+                        <select className="select-name">
+                            {differentUsers}
+                        </select>
+                    </form>
                 </div>
             </div>
         )

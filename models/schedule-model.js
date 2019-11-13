@@ -68,6 +68,10 @@ const MessageCollection = mongoose.model('Messages', MessageSchema)
 
 // User Model Functions
 const getAllUsers = () => {
+  return UserCollection.find({}).sort({username: 'ascending'})
+}
+
+const getNonAdminUsers = () => {
   return UserCollection.find({isAdmin: false}).sort({username: 'ascending'})
 }
 
@@ -153,6 +157,7 @@ module.exports = {
   getAllUsers,
   getUser,
   addNewUser,
+  getNonAdminUsers,
   updateUser,
   getAdmin,
   deleteUser,

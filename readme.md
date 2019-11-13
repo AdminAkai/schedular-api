@@ -4,6 +4,14 @@ Managerial positions spend a substantial amount of effort scheduling employee wo
 
 The goal of this project is to make an schedule generator that prioritizes efficiency, logical accuracy, and dynanism, in order to expedite that process.
 
+# ERD
+
+![ERD][./images/ERD.jpg]
+
+# WIREFRAME
+
+![WIREFRAME][./images/wireframe.jpg]
+
 # Heroku Deployment
 
 [](https://schedular-test-one.herokuapp.com/)

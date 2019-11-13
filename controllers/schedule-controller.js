@@ -136,6 +136,20 @@ scheduleRouter.get('/api/getusers/', async (req, res) => {
   }
 })
 
+// Get NonAdmin Users
+scheduleRouter.get('/api/get-nonadmin-users/', async (req, res) => {
+  try {
+    const allNonAdminUsers = await scheduleApi.getNonAdminUsers()
+    return res.status(200).json(allNonAdminUsers)
+  } catch(e) {
+    const message = 'Failed to get non-admin users'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
 // Get Admin
 scheduleRouter.get('/api/getadmin/', async (req, res) => {
   try {
@@ -209,6 +223,20 @@ scheduleRouter.put('/api/schedules/edit/:id', async (req, res) => {
     return res.status(200).json(editedSchedule)
   } catch(e) {
     const message = 'Failed to edit schedule'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
+// Delete Schedule 
+scheduleRouter.delete('/api/schedules/delete/:id', async (req, res) => {
+  try {
+    const deletedSchedule = await scheduleApi.deleteSchedule(req.params.id)
+    return res.status(200).json(deletedSchedule)
+  } catch(e) {
+    const message = 'Failed to delete schedule'
     res.status(500).json({
       error: e,
       message,

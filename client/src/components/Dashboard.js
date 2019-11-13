@@ -39,7 +39,26 @@ export default class Dashboard extends Component {
     generateSchedule = async (event) => {
         event.preventDefault()
         const currentDate = this.setDateTime()
-        if ('dateScheduled' in this.state.allSchedules[0] === currentDate) {
+        if (this.state.allSchedules[0]) {
+            if ('dateScheduled' in this.state.allSchedules[0] === currentDate) {
+                const daySchedule = this.setDateTime()
+                const allUsers = await axios.get('/api/get-nonadmin-users/')
+                console.log(allUsers.data)
+                allUsers.data.forEach(async (user) => {
+                    console.log(user)
+                    const newSchedule = {
+                        dateScheduled: daySchedule,
+                        scheduledToName: user.username,
+                        scheduledToId: user._id
+                    }
+                    console.log(newSchedule)
+                    await axios.post('/api/createschedule', newSchedule)
+                    this.getSchedules()
+                })
+            } else {
+                alert('Already have schedule generated for today')
+            }
+        } else {
             const daySchedule = this.setDateTime()
             const allUsers = await axios.get('/api/getusers/')
             console.log(allUsers.data)
@@ -52,11 +71,10 @@ export default class Dashboard extends Component {
                 }
                 console.log(newSchedule)
                 await axios.post('/api/createschedule', newSchedule)
-            })
-        } else {
-            alert('Already have schedule generated for today')
-        }
+                this.getSchedules()
+        })
     }
+}
 
     getDashboard = async () => {
         const currentDashboard = await axios.get(`/api/dashboard/${this.currentRoute}`)
@@ -88,10 +106,10 @@ export default class Dashboard extends Component {
                         null
                     }
                     <Schedular 
-                        allSchedules={this.state.allSchedules} 
-                        currentDate={this.state.currentDate} 
-                        isAdmin={this.state.isAdmin}
-                        currentUser={this.props.match.params.id}
+                        schedules={this.state.allSchedules} 
+                        date={this.state.currentDate} 
+                        admin={this.state.isAdmin}
+                        user={this.props.match.params.id}
                     />
                 </div>
             </div>

@@ -24,17 +24,13 @@ export default class Messages extends Component {
     componentDidMount() {
         this.setUser()
         this.getDifferentUsers()
-        setInterval(this.getMessages, 1000)
+        setInterval(this.getMessages, 500)
         setInterval(this.setDateTime, 1000)
     }
 
-    // componentDidUpdate() {
-    //     this.scrollToBottom()
-    // }
-
     componentWillUnmount() {
         clearInterval(this.getMessages())
-        clearInterval(this.setDateTime, 1000)
+        clearInterval(this.setDateTime())
     }
 
     setDateTime = () => {
