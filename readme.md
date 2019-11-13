@@ -6,11 +6,11 @@ The goal of this project is to make an schedule generator that prioritizes effic
 
 # ERD
 
-![ERD][./images/ERD.jpg]
+![ERD](./images/ERD.jpg)
 
 # WIREFRAME
 
-![WIREFRAME][./images/wireframe.jpg]
+![WIREFRAME](./images/wireframe.jpg)
 
 # Heroku Deployment
 
