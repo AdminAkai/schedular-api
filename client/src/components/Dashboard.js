@@ -105,12 +105,16 @@ export default class Dashboard extends Component {
                     : 
                         null
                     }
-                    <Schedular 
+                    {this.state.allSchedules ? 
+                        <Schedular 
                         schedules={this.state.allSchedules} 
                         date={this.state.currentDate} 
                         admin={this.state.isAdmin}
                         user={this.props.match.params.id}
-                    />
+                        />
+                    :
+                        null
+                    }
                 </div>
             </div>
         )

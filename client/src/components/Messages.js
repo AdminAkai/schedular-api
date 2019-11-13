@@ -66,7 +66,6 @@ export default class Messages extends Component {
     }
 
     setSendData = (event) => {
-        console.log(event.target.value)
         this.setState({sentToId: event.target.value}, async () => {
             const sentUserData = await axios.get(`/api/getusers/${this.state.sentToId}`)
             this.setState({sentToName: sentUserData.data.username})

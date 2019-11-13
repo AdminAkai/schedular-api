@@ -33,6 +33,14 @@ export default class Navbar extends Component {
             <div className="navbar">
                 <div className="navbar-container">
                     <div className="navbar-items">
+                    {   this.props.isEditSchedulePage
+                        ? 
+                            <Link className="navbar-option" to={this.returnToDashboard}>
+                                Return to Dashboard
+                            </Link>
+                        :
+                            null
+                        }
                         {this.props.isCreateUserPage
                         ? 
                             <Link className="navbar-option" to={this.returnToDashboard}>

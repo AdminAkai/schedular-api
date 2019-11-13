@@ -7,6 +7,8 @@ export default class EditSchedule extends Component {
 
 
     state = {
+        selectedUser: '',
+        editSchedulePage: true,
         allUsers: [],
         currentDate: '',
         currentUserAdmin: false,
@@ -64,14 +66,19 @@ export default class EditSchedule extends Component {
                 <Navbar 
                     currentProfile={this.props.match.params.id} 
                     isAdmin={this.state.isAdmin}
+                    isEditSchedulePage={this.state.editSchedulePage}
                 />                
                 <div className="schedule-container">
                     <h4>Scheduled To:</h4>
                     <p>{this.state.scheduledToName}</p>
                     <form>
-                        <select className="select-name">
+                        <select className="select-name" name="selectedUser" onChange={this.onChange}>
                             {differentUsers}
                         </select>
+                        <input
+                            className="submit"
+                            value="Edit"
+                        ></input>
                     </form>
                 </div>
             </div>
