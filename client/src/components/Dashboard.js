@@ -105,6 +105,7 @@ export default class Dashboard extends Component {
                     : 
                         null
                     }
+                    <h4>Scheduled for Current Date: {this.state.currentDate}</h4>
                     {this.state.allSchedules ? 
                         <Schedular 
                         schedules={this.state.allSchedules} 

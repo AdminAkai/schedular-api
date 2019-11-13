@@ -31,7 +31,6 @@ export default class Schedular extends Component {
     deleteSchedule = async (event, scheduleId) => {
       event.preventDefault()
       await axios.delete(`/api/schedules/delete/${scheduleId}`)
-      this.forceUpdate()
     }
 
     render() {
@@ -66,7 +65,6 @@ export default class Schedular extends Component {
 
     return (
       <div className="calendar-container">
-        <h4>Scheduled for Current Date: {this.props.currentDate}</h4>
         <div className="calendar">
             {renderAdminSchedules}
         </div>
