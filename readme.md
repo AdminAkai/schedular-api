@@ -14,8 +14,8 @@ The goal of this project is to make an schedule generator that prioritizes effic
 
 # Heroku Deployment
 
-[https://schedular-test-one.herokuapp.com/]
+https://schedular-test-one.herokuapp.com/
 
 # Project Board
 
-[https://trello.com/invite/b/2vEx1Vv0/c735dfd1463b0773f8a4a734c6588644/schedular]
+https://trello.com/invite/b/2vEx1Vv0/c735dfd1463b0773f8a4a734c6588644/schedular
