@@ -28,15 +28,10 @@ const SchedSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  ScheduledByName: {
+  scheduledToName: {
     type: String,
     required: true,
   },
-  ScheduledToName: {
-    type: String,
-    required: true,
-  },
-  scheduledById: mongoose.Types.ObjectId,
   scheduledToId: mongoose.Types.ObjectId
 })
 
@@ -73,7 +68,7 @@ const MessageCollection = mongoose.model('Messages', MessageSchema)
 
 // User Model Functions
 const getAllUsers = () => {
-  return UserCollection.find({}).sort({username: 'ascending'})
+  return UserCollection.find({isAdmin: false}).sort({username: 'ascending'})
 }
 
 const getUser = (id) => {
