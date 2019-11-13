@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Navbar from './Navbar'
 
-export default class HelloWorld extends Component {
+export default class CreateUser extends Component {
 
 
     state = {
@@ -92,6 +92,7 @@ export default class HelloWorld extends Component {
                             <option value="false">No</option>
                         </select>
                         <input
+                            className="submit"
                             type="submit"
                             value="Create User"
                             onClick={this.submitNewUser}

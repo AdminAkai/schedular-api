@@ -161,7 +161,7 @@ scheduleRouter.get('/api/getusers/:id', async (req, res) => {
 })
 
 // Create schedule
-scheduleRouter.post('api/createschedule', async(req, res) => {
+scheduleRouter.post('/api/createschedule', async(req, res) => {
   try {
     const newSchedule = await scheduleApi.addNewSchedule(req.body)
     return res.status(200).json(newSchedule)
@@ -177,10 +177,38 @@ scheduleRouter.post('api/createschedule', async(req, res) => {
 // Get all schedules
 scheduleRouter.get('/api/getschedules', async (req, res) => {
   try {
-    const allSchedules = await scheduleApi.getAllSchedules(req.params.id)
+    const allSchedules = await scheduleApi.getAllSchedules()
     return res.status(200).json(allSchedules) 
   } catch(e) {
     const message = 'Failed to get all schedules'
+    res.status(500).json({
+      error: e,
+      message,
+    })
+  }
+})
+
+// Get Schedule
+scheduleRouter.get('/api/getschedules/:id', async (req, res) => {
+  try {
+    const schedule = await scheduleApi.getSchedule(req.params.id)
+    return res.status(200).json(schedule)
+  } catch(e) {
+    const message = 'Failed to get schedule'
+    res.status(500).json({
+      error: e,
+      message
+    })
+  }
+})
+
+// Edit Schedule
+scheduleRouter.put('/api/schedules/edit/:id', async (req, res) => {
+  try {
+    const editedSchedule = await scheduleApi.updateSchedule(req.params.id, req.body)
+    return res.status(200).json(editedSchedule)
+  } catch(e) {
+    const message = 'Failed to edit schedule'
     res.status(500).json({
       error: e,
       message,

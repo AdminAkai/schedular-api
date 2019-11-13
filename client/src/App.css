@@ -136,17 +136,19 @@
 }
 
 .submit-messages {
-  margin-left: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+ margin-left: 5px;
   font-size: 18px;
   padding: 10px;
   font-weight: 600;
-  background: #ffffff;
+  color: rgb(255, 255, 255);
+  border: 1px solid #ffffff;
+  background-color: #2898d8;
 }
 
 .submit-messages:hover {
-  background: rgba(0, 247, 255, 0.5);
-  border: 1px solid rgba(0, 247, 255, 0.5);
+  color:#2898d8;
+  background-color: #ffffff;
+  border: 1px solid #2898d8;
 }
 
 /* End of Messages */
@@ -162,22 +164,28 @@
 }
 
 .submit {
+  color: rgb(255, 255, 255);
+  padding: 5px;
   margin-top: 20px;
   border: 1px solid #ffffff;
   font-size: 18px;
   padding: 10px;
   font-weight: 600;
-  background: #ffffff;
+  background-color: #2898d8;
+  text-decoration: none;
 }
 
 .submit:hover {
-  background: rgba(0, 247, 255, 0.5);
-  border: 1px solid rgba(0, 247, 255, 0.5);
+  color:#2898d8;
+  background-color: #ffffff;
+  border: 1px solid #2898d8;
 }
 
 .password {
   margin-top: -12px;
 }
+
+/* Navbar */
 
 .navbar {
   position: absolute;
@@ -204,9 +212,24 @@
 }
 
 .navbar-option {
+  text-decoration: none;
   margin: 50px 20px 20px 20px;
+  color: rgb(255, 255, 255);
   padding: 5px;
+  border: 1px solid #ffffff;
 }
+
+.navbar-option:visited {
+  color:rgb(255, 255, 255);
+}
+
+.navbar-option:hover {
+  color:#2898d8;
+  background-color: #ffffff;
+  border: 1px solid #2898d8;
+}
+
+/* Edit Profile */
 
 .edit-profile {
   width: 50%;
@@ -220,6 +243,8 @@
   flex-direction: column;
 }
 
+/* Create User */
+
 .create-user {
   width: 50%;
   height: 50%;
@@ -231,6 +256,8 @@
   align-items: center;
   flex-direction: column;
 }
+
+/*  Animation  */
 
 @keyframes fadeInUp {
   from {
@@ -281,4 +308,23 @@
   text-shadow: 2px 2px #525151;
 }
 
+/* Calendar */
 
+.calendar-container {
+  display: block;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+}
+
+.schedules {
+  padding: 20px;
+  margin-left: 20px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

@@ -117,7 +117,7 @@ const getSchedule = (id) => {
 }
 
 const addNewSchedule = async (newData) => {
-  const newSchedule = await ScheduleCollection.create(newSchedule)
+  const newSchedule = await ScheduleCollection.create(newData)
   return newSchedule 
 }
 

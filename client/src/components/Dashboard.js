@@ -10,40 +10,63 @@ export default class Dashboard extends Component {
     currentRoute = this.props.match.params.id
 
     state = {
+        allSchedules: [],
+        currentDate: "",
         _id: '',
         email: '',
         isAdmin: false,
-        password:'',
         username: '',
     }
 
     componentDidMount() {
         this.getDashboard()
+        this.getSchedules()
+        this.setDateTime()
     }
 
     setDateTime = () => {
         const dateTime = new Date();
         let formatdateTime = moment(dateTime).format("YYYY-MM-DD")
+        this.setState({currentDate: formatdateTime})
         return formatdateTime
+    }
+
+    getSchedules = async () => {
+        const allSchedules = await axios.get('/api/getschedules')
+        this.setState({allSchedules: allSchedules.data})
     }
 
     generateSchedule = async (event) => {
         event.preventDefault()
-        const daySchedule = this.setDateTime()
-        const allUsers = await axios.get('/api/getusers/')
-        allUsers.data.forEach(async (user) => {
-            const newSchedule = {
-                dateScheduled: daySchedule,
-                scheduledToName: user.username,
-                scheduledToId: user._id
-            }
-            await axios.post('api/createschedule', newSchedule)
-        })
+        const currentDate = this.setDateTime()
+        if ('dateScheduled' in this.state.allSchedules[0] === currentDate) {
+            const daySchedule = this.setDateTime()
+            const allUsers = await axios.get('/api/getusers/')
+            console.log(allUsers.data)
+            allUsers.data.forEach(async (user) => {
+                console.log(user)
+                const newSchedule = {
+                    dateScheduled: daySchedule,
+                    scheduledToName: user.username,
+                    scheduledToId: user._id
+                }
+                console.log(newSchedule)
+                await axios.post('/api/createschedule', newSchedule)
+            })
+        } else {
+            alert('Already have schedule generated for today')
+        }
     }
 
     getDashboard = async () => {
         const currentDashboard = await axios.get(`/api/dashboard/${this.currentRoute}`)
-        this.setState(currentDashboard.data)
+        const currentUser = {
+            _id: currentDashboard.data._id,
+            email: currentDashboard.data.email,
+            username: currentDashboard.data.username,
+            isAdmin: currentDashboard.data.isAdmin,
+        }
+        this.setState(currentUser)
     }
 
     render() {
@@ -55,11 +78,21 @@ export default class Dashboard extends Component {
                 />
                 <div className="component-container">
                     {this.state.isAdmin ? 
-                        <button onClick={this.generateSchedule}>Generate Schedule</button>
+                        <button 
+                            onClick={this.generateSchedule}
+                            className='submit'
+                        >
+                            Generate Schedule
+                        </button>
                     : 
                         null
                     }
-                    <Schedular />
+                    <Schedular 
+                        allSchedules={this.state.allSchedules} 
+                        currentDate={this.state.currentDate} 
+                        isAdmin={this.state.isAdmin}
+                        currentUser={this.props.match.params.id}
+                    />
                 </div>
             </div>
         )

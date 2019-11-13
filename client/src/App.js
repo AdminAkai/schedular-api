@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard'
 import EditProfile from './components/EditProfile'
 import Messages from './components/Messages'
 import CreateUser from './components/CreateUser'
+import EditSchedule from './components/EditSchedule'
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/dashboard/edit/:id" component={EditProfile}></Route>
           <Route path="/dashboard/messages/:id" component={Messages}></Route>
           <Route path="/dashboard/createuser/:id" component={CreateUser}></Route>
+          <Route path="/dashboard/schedule/:id/:scheduleId" component={EditSchedule}></Route>
           <Route path="/dashboard/:id" component={Dashboard}></Route>
         </Switch>
       </Router>
