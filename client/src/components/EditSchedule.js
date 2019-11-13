@@ -22,6 +22,7 @@ export default class EditSchedule extends Component {
     componentDidMount() {
         this.getDifferentUsers()
         this.setDateTime()
+        this.getCurrentSchedule()
     }
 
     setDateTime = () => {
@@ -32,23 +33,32 @@ export default class EditSchedule extends Component {
     }
 
     getCurrentSchedule = async () => {
-        const currentSchedule = await axios.get(`/api/getschedules/${this.props.match.scheduleId}`)
+        const currentSchedule = await axios.get(`/api/getschedules/${this.props.match.params.scheduleId}`)
+        console.log(currentSchedule)
         const thisSchedule = {
             dateScheduled: currentSchedule.data.dateScheduled,
             scheduledToName: currentSchedule.data.scheduledToName,
             scheduleToId: currentSchedule.data.scheduleToId
         }
-        this.setState({thisSchedule})
+        this.setState(thisSchedule)
     }
 
     getDifferentUsers = async () => {
-        const allUsers = await axios.get('/api/getusers/')
+        const allUsers = await axios.get('/api/get-nonadmin-users/')
         this.setState({allUsers: allUsers.data}) 
     }
 
     getCurrentUser = async () => {
         const currentUser = await axios.get(`/api/getusers/${this.props.match.id}`)
         this.setState({currentUserAdmin: currentUser.data.isAdmin})
+    }
+
+    setScheduledTo = (event) => {
+        this.setState({selectedUser: event.target.value})
+    }
+
+    sendEditData = async () => {
+        const editSchedule = await axios.put(`/api/schedules/edit/${this.state.selectedSchedule}`)
     }
 
     render() {
@@ -69,13 +79,14 @@ export default class EditSchedule extends Component {
                     isEditSchedulePage={this.state.editSchedulePage}
                 />                
                 <div className="schedule-container">
-                    <h4>Scheduled To:</h4>
-                    <p>{this.state.scheduledToName}</p>
-                    <form>
-                        <select className="select-name" name="selectedUser" onChange={this.onChange}>
+                    <form className="form">
+                        <h4>Scheduled To:</h4>
+                        <p>{this.state.scheduledToName}</p> 
+                        <select className="select-schedule-to" name="selectedUser" onChange={this.setScheduledTo}>
                             {differentUsers}
                         </select>
                         <input
+                            type="Submit"
                             className="submit"
                             value="Edit"
                         ></input>
