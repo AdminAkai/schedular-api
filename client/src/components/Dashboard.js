@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Navbar from './Navbar.js'
 import Schedular from './Schedular.js'
+import moment from 'moment'
 
 export default class Dashboard extends Component {
 
@@ -30,7 +31,7 @@ export default class Dashboard extends Component {
         event.preventDefault()
         const daySchedule = this.setDateTime()
         const allUsers = await axios.get('/api/getusers/')
-        allUsers.forEach((user) => {
+        allUsers.data.forEach(async (user) => {
             const newSchedule = {
                 dateScheduled: daySchedule,
                 scheduledToName: user.username,
